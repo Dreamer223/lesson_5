@@ -174,22 +174,17 @@ public class Main {
     static void backup(){
         String rootFolderPath = "E:\\Учеба\\stepik\\lesson_5\\src\\main\\java\\JavaCore"; // Укажите свой путь к корневой папке
 
-        // Путь к файлу бекапа
-        String backupFilePath = "./backup"; // Имя файла бекапа (будет создан в текущей директории)
+        String backupFilePath = "./backup";
 
         try {
-            // Создаем объекты для работы с файлами
             File rootFolder = new File(rootFolderPath);
             File backupFile = new File(backupFilePath);
 
-            // Создаем поток для записи данных в файл бекапа
             FileOutputStream fos = new FileOutputStream(backupFile);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-            // Рекурсивно копируем содержимое корневой папки в файл бекапа
             copyFolder(rootFolder, bos);
 
-            // Закрываем потоки
             bos.close();
             fos.close();
 
@@ -199,7 +194,6 @@ public class Main {
         }
     }
 
-    // Рекурсивная функция для копирования содержимого папки в файл
     private static void copyFolder(File folder, OutputStream outputStream) throws IOException {
         File[] files = folder.listFiles();
         byte[] buffer = new byte[1024];
@@ -208,10 +202,8 @@ public class Main {
         if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
-                    // Рекурсивно копируем содержимое подпапки
                     copyFolder(file, outputStream);
                 } else {
-                    // Копируем содержимое файла в поток вывода
                     FileInputStream fis = new FileInputStream(file);
                     BufferedInputStream bis = new BufferedInputStream(fis);
 
